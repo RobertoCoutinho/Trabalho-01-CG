@@ -18,6 +18,45 @@ Objeto* tabuleiro = new Tabuleiro(0);
 int posSelecionado = -1;
 bool pause = false;
 
+float centro_x = 3.5;
+float centro_y = 14;
+float centro_z = 10;
+
+float olho_x = 3.5;
+float olho_y = 4;
+float olho_z = 0;
+
+float up_x = 0;
+float up_y = 1;
+float up_z = 0;
+
+void defineCamera1(){
+    centro_x = 3.5;
+    centro_y = 14;
+    centro_z = 10;
+
+    olho_x = 3.5;
+    olho_y = 4;
+    olho_z = 0;
+
+    up_x = 0;
+    up_y = 1;
+    up_z = 0;
+}
+void defineCamera2(){
+    centro_x = 3.5;
+    centro_y = 14;
+    centro_z = -20;
+
+    olho_x = 3.5;
+    olho_y = 4;
+    olho_z = 0;
+
+    up_x = 0;
+    up_y = 1;
+    up_z = 0;
+}
+
 Vetor3D transformedPoint(Vetor3D p)
 {
     glMatrixMode(GL_MODELVIEW);
@@ -224,18 +263,10 @@ void desenha() {
         */
 
         gluLookAt(
-            8,
-            9,
-            8,
-            glutGUI::cam->c.x,
-            glutGUI::cam->c.y,
-            glutGUI::cam->c.z,
-            glutGUI::cam->u.x,
-            glutGUI::cam->u.y,
-            glutGUI::cam->u.z);
+            centro_x,centro_y,centro_z,
+            olho_x, olho_y, olho_z,
+            up_x,up_y,up_z);
 
-
-        //gluLookAt(0,12,17, 0,0,0, 0,1,0);
         displayInner();
 
         if (!objetos.empty()) {
@@ -301,12 +332,14 @@ void teclado(unsigned char key, int x, int y) {
 
     switch (key) {
     case '1':
+        defineCamera1();
         if (posSelecionado >= 0 and posSelecionado < objetos.size()) {
             objetos[posSelecionado]->selecionado = false;
         }
         posSelecionado = -1;
         break;
     case '2':
+        defineCamera2();
         if (posSelecionado >= 0 and posSelecionado < objetos.size()) {
             objetos[posSelecionado]->selecionado = false;
         }

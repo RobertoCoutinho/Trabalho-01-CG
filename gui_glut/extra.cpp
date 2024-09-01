@@ -401,22 +401,14 @@ void glutGUI::mouseMove(int x, int y) {
             cam->rotatex(y,last_y);
             cam->rotatey(x,last_x);
         }
-        /*
-        if (trans_obj) {
-            dax = (y - last_y)/fator;
-            day = (x - last_x)/fator;
-            ax += dax;
-            ay += day;
-        }
-        */
-        // /*
+
         if (trans_obj) {
             dtx = (x - last_x) / fatorTranslacao;
-            dtz = (y - last_y) / fatorTranslacao;  // Mudança de 'dty' para 'dtz'
+            dtz = (y - last_y) / fatorTranslacao;
             tx += dtx;
-            tz += dtz;  // Atualização do eixo Z em vez de Y
+            tz += dtz;
         }
-        // */
+
         if (trans_luz && obj_transp) {
             fator = 100.0;
             transparencia -= (y - last_y)/fator;

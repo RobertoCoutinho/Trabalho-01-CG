@@ -14,6 +14,7 @@ public:
     float colorR;
     float colorG;
     float colorB;
+    bool exibe_origem = false;
 public:
     Objeto();
     virtual void desenha();

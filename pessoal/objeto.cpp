@@ -11,6 +11,11 @@ void Objeto::desenha()
     glRotatef(a.z,0,0,1);  // \ .
     glRotatef(a.y,0,1,0);  //  | Rz.Ry.Rx . v
     glRotatef(a.x,1,0,0);  // /
-    GUI::drawOrigin(1);
+    if(exibe_origem){
+        GUI::drawOrigin(1);
+    }
+    else{
+        GUI::drawOrigin(0);
+    }
     glScalef(s.x,s.y,s.z); //transformacao (matriz) mais a direita (mais local)
 }

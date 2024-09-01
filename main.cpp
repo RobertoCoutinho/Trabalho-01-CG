@@ -11,24 +11,23 @@ using namespace std;
 #include <rainha.h>
 #include <cavalo.h>
 
-//Model3DS model3ds("../3ds/cartest.3DS");
 
 vector<Objeto*> objetos;
 Objeto* tabuleiro = new Tabuleiro(0);
 int posSelecionado = -1;
 bool pause = false;
 
-float centro_x = 3.5;
-float centro_y = 14;
-float centro_z = 10;
+float centro_x;
+float centro_y;
+float centro_z;
 
-float olho_x = 3.5;
-float olho_y = 4;
-float olho_z = 0;
+float olho_x;
+float olho_y;
+float olho_z;
 
-float up_x = 0;
-float up_y = 1;
-float up_z = 0;
+float up_x;
+float up_y;
+float up_z;
 
 int direcao_translacao = 1;
 bool define_camera_livre = false;
@@ -61,30 +60,6 @@ void defineCamera2(){
     up_z = 0;
 
 }
-
-/*
-Vetor3D transformedPoint(Vetor3D p)
-{
-    glMatrixMode(GL_MODELVIEW);
-    glPushMatrix();
-    glLoadIdentity();
-
-    glRotatef(objetos[0]->a.z,0,0,1);
-    glRotatef(objetos[0]->a.y,0,1,0);
-    glRotatef(objetos[0]->a.x,1,0,0);
-
-    float matrix[16];
-    glGetFloatv(GL_MODELVIEW_MATRIX, matrix);
-    glPopMatrix();
-
-    float pos[4] = {p.x,p.y,p.z, 1.0};
-    float res[4];
-
-    glutGUI::multGLMatrixByVector(res,matrix,pos);
-
-    Vetor3D res3D = Vetor3D(res[0],res[1],res[2]);
-    return res3D;
-}*/
 
 void displayInner() {
     GUI::setLight(6,3.5,8,-3.5,true,false);
@@ -334,6 +309,11 @@ void teclado(unsigned char key, int x, int y) {
             objetos[posSelecionado]->selecionado = true;
         }
         break;
+    case 'p':
+        for (int i = 0; i < objetos.size(); ++i) {
+                objetos[i]-> exibe_origem = !objetos[i]-> exibe_origem;
+            }
+        break;
     default:
         break;
     }
@@ -386,14 +366,10 @@ void iniciarPecas(){
 int main()
 {
     glutGUI::trans_obj = true;
+    defineCamera1();
     iniciarPecas();
     cout << "Hello World!" << endl;
 
     GUI gui = GUI(800,600,desenha,teclado);
 }
 
-
-//while(true) {
-//    desenha();
-//    interacaoUsuario();
-//}
